@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Radar — Don't Wake Up to a Frozen Stripe Account</title>
+    <meta name="description" content="Get early warnings when your Stripe dispute ratio or velocity spikes toward danger — plus exactly what to do about it.">
+    
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Risk Radar — Stripe Account Health Monitoring">
+    <meta property="og:description" content="Get early warnings before Stripe freezes your account.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://getriskradar.com">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #22c55e;
+            margin-bottom: 48px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+        
+        .hero .subheadline {
+            font-size: 18px;
+            color: #a0a0a0;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Form */
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 500px) {
+            .signup-form {
+                flex-direction: row;
+            }
+        }
+        
+        .signup-form input[type="email"] {
+            flex: 1;
+            padding: 16px 20px;
+            font-size: 16px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: #111;
+            color: #fff;
+        }
+        
+        .signup-form input[type="email"]::placeholder {
+            color: #666;
+        }
+        
+        .signup-form button {
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            background: #22c55e;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .signup-form button:hover {
+            background: #1ea550;
+        }
+        
+        .form-note {
+            font-size: 14px;
+            color: #666;
+            margin-top: 16px;
+        }
+        
+        /* Trust Section */
+        .trust {
+            padding: 80px 0;
+            background: #111;
+        }
+        
+        .trust h2 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+        
+        .trust-item {
+            text-align: center;
+            padding: 24px;
+        }
+        
+        .trust-item .icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+        
+        .trust-item h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .trust-item p {
+            font-size: 14px;
+            color: #888;
+        }
+        
+        /* Problem Section */
+        .problem {
+            padding: 80px 0;
+        }
+        
+        .problem h2 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        
+        .problem .stat {
+            text-align: center;
+            font-size: 18px;
+            color: #888;
+            font-style: italic;
+            margin-bottom: 48px;
+        }
+        
+        .problem-grid {
+            display: grid;
+            gap: 32px;
+        }
+        
+        .problem-item h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #f59e0b;
+            margin-bottom: 8px;
+        }
+        
+        .problem-item p {
+            color: #a0a0a0;
+        }
+        
+        .quote {
+            margin-top: 48px;
+            padding: 24px;
+            border-left: 3px solid #22c55e;
+            background: #111;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .quote p {
+            font-style: italic;
+            color: #a0a0a0;
+        }
+        
+        .quote cite {
+            display: block;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: #111;
+        }
+        
+        .features h2 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .features-grid {
+            display: grid;
+            gap: 40px;
+        }
+        
+        .feature-item {
+            padding: 32px;
+            background: #0a0a0a;
+            border-radius: 12px;
+            border: 1px solid #222;
+        }
+        
+        .feature-item .icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+        
+        .feature-item h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .feature-item p {
+            color: #a0a0a0;
+            margin-bottom: 16px;
+        }
+        
+        .feature-item .example {
+            background: #111;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            color: #22c55e;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .pricing h2 {
+            font-size: 32px;
+            margin-bottom: 32px;
+        }
+        
+        .price-card {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 40px;
+            background: #111;
+            border-radius: 16px;
+            border: 2px solid #22c55e;
+        }
+        
+        .price-amount {
+            font-size: 48px;
+            font-weight: 700;
+            color: #22c55e;
+        }
+        
+        .price-period {
+            font-size: 18px;
+            color: #888;
+        }
+        
+        .price-note {
+            font-size: 14px;
+            color: #666;
+            margin: 16px 0 32px;
+        }
+        
+        .price-features {
+            text-align: left;
+            margin-bottom: 32px;
+        }
+        
+        .price-features li {
+            list-style: none;
+            padding: 8px 0;
+            color: #a0a0a0;
+        }
+        
+        .price-features li::before {
+            content: "✓ ";
+            color: #22c55e;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+            background: #111;
+        }
+        
+        .faq h2 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .faq-item {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid #222;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-item h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .faq-item p {
+            color: #a0a0a0;
+        }
+        
+        /* Final CTA */
+        .final-cta {
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .final-cta h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        
+        .final-cta p {
+            font-size: 18px;
+            color: #888;
+            margin-bottom: 40px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 32px 0;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+        
+        footer p {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="logo">⚡ Risk Radar</div>
+            <h1>Don't Wake Up to a Frozen Stripe Account</h1>
+            <p class="subheadline">
+                Get early warnings when your dispute ratio or velocity spikes toward danger — plus exactly what to do about it.
+            </p>
+            
+            <!-- Replace this with your actual form (Tally, Formspree, etc.) -->
+            <form class="signup-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <input type="email" name="email" placeholder="Enter your work email" required>
+                <button type="submit">Request Beta Access</button>
+            </form>
+            <p class="form-note">Free for first 50 beta users. No credit card required.</p>
+        </div>
+    </section>
+    
+    <!-- Trust Section -->
+    <section class="trust">
+        <div class="container">
+            <h2>🔒 Zero-Risk Integration</h2>
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <div class="icon">👁️</div>
+                    <h3>Read-Only Access</h3>
+                    <p>We connect via Stripe's official OAuth. We cannot modify anything.</p>
+                </div>
+                <div class="trust-item">
+                    <div class="icon">🔐</div>
+                    <h3>Non-Custodial</h3>
+                    <p>We never touch your funds, initiate refunds, or change settings.</p>
+                </div>
+                <div class="trust-item">
+                    <div class="icon">📊</div>
+                    <h3>Minimal Data</h3>
+                    <p>We see disputes & charges. Not customer PII or card numbers.</p>
+                </div>
+                <div class="trust-item">
+                    <div class="icon">✅</div>
+                    <h3>Stripe Approved</h3>
+                    <p>Built for the official Stripe App Marketplace.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <h2>"Hope" Is Not a Risk Strategy</h2>
+            <p class="stat">26% of Stripe founders are flying blind — checking dashboards occasionally and hoping for the best.</p>
+            
+            <div class="problem-grid">
+                <div class="problem-item">
+                    <h3>⚠️ THE SILENT KILLER</h3>
+                    <p>A sudden sales spike (velocity) can freeze your funds even with zero chargebacks. Stripe's algorithm flags unusual patterns.</p>
+                </div>
+                <div class="problem-item">
+                    <h3>⚠️ THE 1% TRAP</h3>
+                    <p>Once your dispute ratio hits 0.9%, you enter Visa/Mastercard monitoring programs. Fines start. Freezes follow.</p>
+                </div>
+                <div class="problem-item">
+                    <h3>⚠️ THE 120-DAY NIGHTMARE</h3>
+                    <p>When Stripe holds your funds, it's typically 90-180 days. Can your business survive 4+ months without that cash flow?</p>
+                </div>
+            </div>
+            
+            <div class="quote">
+                <p>"Stripe froze $130,000 during our biggest growth month. We almost didn't survive."</p>
+                <cite>— Reddit r/stripe</cite>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Your "Account Health" Command Center</h2>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="icon">🚦</div>
+                    <h3>Traffic Light Dashboard</h3>
+                    <p>See your risk status in plain English — not confusing charts.</p>
+                    <div class="example">
+                        🟢 Green: You're safe<br>
+                        🟡 Yellow: Warning (0.7%+)<br>
+                        🔴 Red: Danger — act now
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="icon">🚨</div>
+                    <h3>Slack + SMS Panic Alerts</h3>
+                    <p>Emails get buried. We send urgent alerts where you'll actually see them.</p>
+                    <div class="example">
+                        "Your dispute ratio hit 0.8% — here's what to do NOW"
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="icon">📋</div>
+                    <h3>Prescriptive Action Playbooks</h3>
+                    <p>Don't just get an alert — get a fix.</p>
+                    <div class="example">
+                        Warning: Velocity spike detected.<br>
+                        Action: Pause FB ads for 24 hours.<br>
+                        Action: Add 3DS for orders over $200.
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="icon">🛡️</div>
+                    <h3>Contingency Planning</h3>
+                    <p>If risk stays elevated, we help you prepare:</p>
+                    <div class="example">
+                        → When to set up a backup processor<br>
+                        → How to communicate with Stripe<br>
+                        → Documentation checklist for appeals
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <h2>Simple Pricing. Serious Protection.</h2>
+            
+            <div class="price-card">
+                <div class="price-amount">$29</div>
+                <div class="price-period">/month</div>
+                <p class="price-note">Early access price (Regular: $49/mo)</p>
+                
+                <ul class="price-features">
+                    <li>Real-time dispute ratio tracking</li>
+                    <li>Velocity spike detection</li>
+                    <li>Slack + SMS alerts</li>
+                    <li>Action playbooks for every alert</li>
+                    <li>Contingency planning guidance</li>
+                </ul>
+                
+                <form class="signup-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <input type="email" name="email" placeholder="Enter your work email" required>
+                    <button type="submit">Join Waitlist</button>
+                </form>
+                <p class="form-note" style="margin-top: 16px;">For businesses doing $10K+/month on Stripe</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2>Questions? Answers.</h2>
+            
+            <div class="faq-item">
+                <h3>Can Risk Radar guarantee I won't get frozen?</h3>
+                <p>No — and anyone who promises that is lying. Stripe can freeze accounts for reasons no external tool can see (KYC issues, prohibited business flags). We give you early warning and specific actions to reduce your risk.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>How is this different from Stripe Radar?</h3>
+                <p>Stripe Radar evaluates each transaction for fraud. Risk Radar monitors your overall account health — dispute ratios, velocity patterns, payout anomalies. Different use cases.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>Can you access my funds?</h3>
+                <p>No. We use read-only OAuth permissions. We cannot touch your money or change any settings.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>I could build this myself. Why pay you?</h3>
+                <p>You could. But would you maintain it while running your business? The value is alerts that fire at the right time, plain English interpretation, and prescriptive actions — not raw API access.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>What if I'm already in trouble?</h3>
+                <p>Join the waitlist and reply to your welcome email — we'll prioritize your audit and help you understand where you stand.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Stop Flying Blind</h2>
+            <p>70% of Stripe founders either "hope for the best" or maintain DIY scripts. You have better things to do.</p>
+            
+            <form class="signup-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <input type="email" name="email" placeholder="Enter your work email" required>
+                <button type="submit">Request Beta Access</button>
+            </form>
+            <p class="form-note">First 50 users get lifetime $29/mo pricing.</p>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 Risk Radar. Built for Stripe merchants who refuse to fly blind.</p>
+        </div>
+    </footer>
+</body>
+</html>
