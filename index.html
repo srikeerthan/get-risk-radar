@@ -222,7 +222,8 @@
         }
         
         .section-label {
-            display: inline-block;
+            display: block;
+            text-align: center;
             font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
@@ -240,8 +241,16 @@
         
         .trust-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 24px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 600px) {
+            .trust-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         .trust-item {
