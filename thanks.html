@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're on the list! — Risk Radar</title>
+    <meta name="robots" content="noindex">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 550px;
+            text-align: center;
+        }
+        
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #22c55e;
+            margin-bottom: 48px;
+            text-decoration: none;
+        }
+        
+        .emoji {
+            font-size: 72px;
+            margin-bottom: 24px;
+        }
+        
+        h1 {
+            font-size: clamp(32px, 5vw, 42px);
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #a0a0a0;
+            margin-bottom: 48px;
+            line-height: 1.7;
+        }
+        
+        .skip-box {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: left;
+            margin-bottom: 32px;
+        }
+        
+        .skip-box h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #22c55e;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .skip-box p {
+            color: #a0a0a0;
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        .skip-box ol {
+            color: #a0a0a0;
+            margin-left: 20px;
+            font-size: 15px;
+            line-height: 1.9;
+        }
+        
+        .skip-box li {
+            margin-bottom: 8px;
+            padding-left: 8px;
+        }
+        
+        .skip-box strong {
+            color: #fff;
+        }
+        
+        .highlight-box {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+        
+        .highlight-box p {
+            margin: 0;
+            color: #22c55e;
+            font-weight: 500;
+        }
+        
+        .note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #666;
+            margin-top: 32px;
+            padding: 16px;
+            background: #111;
+            border-radius: 8px;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 32px;
+            color: #a0a0a0;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .back-link:hover {
+            color: #22c55e;
+        }
+        
+        .share-section {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid #222;
+        }
+        
+        .share-section p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        
+        .share-btn:hover {
+            border-color: #22c55e;
+            background: #1a1a1a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="logo">
+            <span>⚡</span>
+            <span>Risk Radar</span>
+        </a>
+        
+        <div class="emoji">🎉</div>
+        <h1>You're on the list!</h1>
+        <p class="subtitle">
+            We're onboarding beta users in small batches to ensure quality. 
+            You'll hear from us soon.
+        </p>
+        
+        <div class="skip-box">
+            <h2>🚀 Want to Skip the Line?</h2>
+            <p>We're prioritizing merchants who need this most. Reply to your welcome email with:</p>
+            <ol>
+                <li><strong>Your monthly Stripe volume</strong> (roughly: $10K, $50K, $100K+)</li>
+                <li><strong>Have you ever had a Stripe scare?</strong> (freeze, reserve, review, etc.)</li>
+            </ol>
+            
+            <div class="highlight-box">
+                <p>🎁 If you've had a scare, we'll do a <strong>free risk audit</strong> of your account.</p>
+            </div>
+        </div>
+        
+        <div class="note">
+            <span>📧</span>
+            <span>Check your inbox (and spam folder) for the welcome email.</span>
+        </div>
+        
+        <div class="share-section">
+            <p>Know someone who needs this?</p>
+            <div class="share-buttons">
+                <a href="https://twitter.com/intent/tweet?text=Just%20signed%20up%20for%20Risk%20Radar%20%E2%80%94%20early%20warnings%20before%20Stripe%20freezes%20your%20account.%20Check%20it%20out%3A&url=https://getriskradar.com" target="_blank" class="share-btn">
+                    𝕏 Share on X
+                </a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://getriskradar.com" target="_blank" class="share-btn">
+                    in Share on LinkedIn
+                </a>
+            </div>
+        </div>
+        
+        <a href="/" class="back-link">
+            ← Back to Risk Radar
+        </a>
+    </div>
+</body>
+</html>
